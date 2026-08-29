@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f1b2d">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Tổng DSKH 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --navy: #111318;
+  --navy-mid: #1a1d24;
+  --navy-light: #121212;
+  --accent: #3b82f6;
+  --accent-glow: #60a5fa;
+  --gold: #f59e0b;
+  --red: #ef4444;
+  --green: #10b981;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --border: rgba(255,255,255,0.08);
+  --card: rgba(255,255,255,0.04);
+  --radius: 12px;
+  --header-h: 56px;
+  --header-h-mobile: 68px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+  transition: background-color 0.5s ease, color 0.4s ease;
+}
+
+/* ── HEADER ─────────────────────────────── */
+.header {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s ease, border-color 0.4s ease;
+  height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.header-left { display: flex; align-items: center; gap: 10px; }
+
+.logo-icon {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  border-radius: 7px;
+  display: none;
+  align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.header-title { font-size: 18px; font-weight: 800; letter-spacing: 0.3px; color: #ffffff; }
+.header-sub { font-size: 12px; color: var(--text-dim); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+
+.upload-btn-header {
+  background: #1e3a5f;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.8);
+  padding: 8px 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  flex-shrink: 0;
+}
+
+.upload-btn-header:active { background: rgba(203,213,225,0.4); }
+@media (max-width: 500px) {
+  .header { height: auto; min-height: var(--header-h-mobile); padding: 2px 10px; align-items: center; justify-content: space-between; }
+  .upload-btn-header { padding: 4px 8px; font-size: 11px; gap: 3px; }
+  .header-right { gap: 2px; flex-direction: column; }
+  .header-title { font-size: 15px; }
+  .header-sub { font-size: 11px; max-width: none; white-space: normal; line-height: 1.3; }
+  .header-left { gap: 6px; }
+  .header-right .upload-btn-header { width: 100%; justify-content: center; }
+  .main { padding: 0 4px; }
+}
+
+.header-right { display: flex; align-items: center; gap: 8px; }
+
+.theme-toggle {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background: conic-gradient(#ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ec4899, #ef4444);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+}
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #0f172a;
+}
+.theme-toggle:active { transform: scale(0.9); }
+
+/* ── LIGHT MODE ───────────────────────── */
+body.light-mode {
+  background: #ffffff;
+  color: #000000;
+}
+body.light-mode .header { background: #1e40af; border-bottom: none; }
+body.light-mode .header-title { color: #ffffff; font-weight: 900; }
+body.light-mode .header-sub { color: #94a3b8; font-weight: 400; }
+body.light-mode .logo-icon { display: none; }
+body.light-mode .upload-btn-header { background: #e2e8f0; color: #0f172a; border-color: #94a3b8; font-weight: 700; }
+body.light-mode .theme-toggle { background: conic-gradient(#ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ec4899, #ef4444); border: 3px solid transparent; color: #f97316; }
+body.light-mode .theme-toggle::before { background: #d1d5db; }
+body.light-mode .search-box { background: #ffffff; border-color: #94a3b8; }
+body.light-mode .search-box input { color: #000000; font-weight: 600; }
+body.light-mode .search-box input::placeholder { color: #64748b; }
+body.light-mode .filter-row { background: #ffffff; }
+body.light-mode .filter-row select, body.light-mode .filter-select { color: #000000; font-weight: 600; background: #e2e8f0; border: 1.5px solid #1e40af; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%23000000'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+body.light-mode .nhom-dropdown { background: #ffffff !important; border-color: #cbd5e1 !important; }
+body.light-mode .nhom-option { color: #000000 !important; border-bottom: 1px solid #94a3b8 !important; background: #ffffff !important; font-weight: 700 !important; }
+body.light-mode .nhom-option:hover { background: rgba(59,130,246,0.1) !important; }
+body.light-mode .toolbar { background: #ffffff; border-bottom-color: #e2e8f0; }
+body.light-mode .toolbar.stuck { box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+body.light-mode .sort-btn { background: #e2e8f0; color: #000000; border-color: #cbd5e1; font-weight: 700; }
+body.light-mode .sort-btn.active { background: #2563eb; color: #ffffff; }
+body.light-mode .kh-card { background: #ffffff; border: 1.5px solid #cbd5e1; }
+body.light-mode .card-list { gap: 3px; }
+body.light-mode .kh-name { color: #1d4ed8; font-weight: 700; font-size: 17px; }
+  @media (max-width: 639.98px) { body.light-mode .kh-name { font-size: 17px; } }
+body.light-mode .kh-ma-line, body.light-mode .kh-phone-line { color: #64748b; font-weight: 600; font-size: 14px; }
+body.light-mode .kh-ma { color: #111827; font-weight: 600; font-size: 14px; }
+body.light-mode .kh-danhso { color: #111827; font-weight: 600; font-size: 14px; }
+body.light-mode .kh-sogcs { color: #64748b; font-weight: 500; font-size: 14px; }
+body.light-mode .kh-phone { color: #64748b !important; font-weight: 500; font-size: 14px; text-decoration: none !important; }
+body.light-mode .kh-thang { color: #475569; font-weight: 600; font-size: 14px; }
+body.light-mode .kh-address { color: #0f172a; font-weight: 800; font-size: 14px; }
+body.light-mode .kh-addr-line { color: #475569; font-weight: 500; font-size: 14px; }
+body.light-mode .kh-ghichu { background: #f8fafc; border-color: #1e40af; color: #000000; font-weight: 600; }
+body.light-mode .count-info { color: #1d4ed8; font-weight: 700; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e2e8f0; }
+body.light-mode #countKHBarFiltered { color: #1d4ed8 !important; }
+body.light-mode #countKHBarTotal { color: #c2410c !important; }
+body.light-mode .page-btn { background: #ffffff; border-color: #cbd5e1; color: #000000; font-weight: 700; }
+body.light-mode .page-btn.active { background: #3b82f6; color: #ffffff; }
+body.light-mode .pagination { color: #334155; }
+body.light-mode .modal { background: #ffffff; }
+body.light-mode .modal-header { background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+body.light-mode .modal-name { color: #000000; font-weight: 900; }
+body.light-mode .modal-ma { color: #000000; font-weight: 700; }
+#modalMa { display: none; }
+#modalHeader { display: none; }
+body.light-mode .modal-body { color: #000000; }
+body.light-mode .modal-handle { background: rgba(0,0,0,0.15); }
+body.light-mode .modal-close { background: #e2e8f0; color: #334155; }
+body.light-mode .info-row { border-bottom-color: #e2e8f0; }
+body.light-mode .info-label { color: #94a3b8; font-size: 14px; }
+body.light-mode .info-value { color: #0f172a; }
+body.light-mode .info-row:nth-child(2) .info-value .ma-kh, body.light-mode .info-row:nth-child(5) .info-value span, body.light-mode .info-row:nth-child(6) .info-value span { color: #1e40af !important; }
+body.light-mode .call-link { background: rgba(16,185,129,0.15); color: #166534; }
+body.light-mode .table-view th { background: #94a3b8; color: #ffffff; border-color: #94a3b8; font-weight: 800; position: sticky; top: 0; z-index: 10; }
+body.light-mode .table-view td { border-color: #94a3b8; color: #000000; font-weight: 600; border-bottom: 1px solid #94a3b8; }
+body.light-mode .table-view td:nth-child(2) .ma-kh { color: #1e40af !important; font-weight: 700; }
+body.light-mode .table-view td:nth-child(3) .ten-kh { color: #1e40af !important; font-weight: 700; }
+body.light-mode .table-view td:nth-child(6).cell-dim { color: #1e40af !important; font-weight: 700; }
+body.light-mode .table-view td:nth-child(4).cell-addr { color: #475569 !important; font-weight: 500; }
+body.light-mode .table-view td:nth-child(9).cell-dim { color: #475569 !important; font-weight: 500; }
+body.light-mode .table-view td:nth-child(10).cell-dim { color: #475569 !important; font-weight: 500; }
+body.light-mode .table-view td:nth-child(11).cell-dim { color: #475569 !important; font-weight: 500; }
+body.light-mode .table-view tr:hover { background: #1e40af; color: #ffffff; }
+body.light-mode .table-view tr:hover .ma-kh { color: #ffffff !important; }
+body.light-mode .table-view tr:hover .ten-kh { color: #ffffff !important; }
+body.light-mode .table-view tr:hover .phone { color: #ffffff !important; }
+body.light-mode .table-view tr:hover td.cell-dim { color: #ffffff !important; }
+body.light-mode .table-view tr:hover td.cell-addr { color: #ffffff !important; }
+body.light-mode .table-view tr:hover .addr-link { color: #ffffff !important; }
+body.light-mode .table-view .phone { color: #1e293b !important; font-weight: 700; }
+body.light-mode .table-view .cell-ghi { color: #c2410c !important; font-weight: 700; }
+body.light-mode .table-view .ghi-chu-table { color: #1e293b !important; font-weight: 700; border-color: #fdba74; }
+body.light-mode .ghi-chu-input { color: #1e293b !important; }
+body.light-mode .ghi-chu-input:not(:placeholder-shown) { color: #1e293b !important; }
+body.light-mode .summary-wrap { background: #ffffff; border-color: #1e40af; }
+body.light-mode .summary-table th { background: #f1f5f9; color: #1e40af; border-color: #e2e8f0; font-weight: 800; }
+body.light-mode .summary-table td { color: #000000; border-color: #e2e8f0; font-weight: 600; }
+body.light-mode .summary-table tr:hover { background: #f8fafc; }
+body.light-mode .summary-table tfoot td { color: #1e40af; font-weight: 800; background: #f1f5f9; }
+body.light-mode .summary-table .tien-no-cell { color: #dc2626; font-weight: 800; }
+body.light-mode .tien-no { font-weight: 900; }
+body.light-mode .tien-no.high { color: #dc2626; }
+body.light-mode .tien-no.low { color: #166534; }
+body.light-mode .tien-no.mid { color: #166534; }
+body.light-mode .tien-no .mil-digit { color: #dc2626; }
+body.light-mode .kh-tien { color: #dc2626; font-weight: 800; }
+body.light-mode .kh-tien.high { color: #dc2626; }
+body.light-mode .kh-tien.low { color: #1e40af; }
+body.light-mode .kh-tien .mil-digit { color: #dc2626; }
+body.light-mode .count-kh-hd { color: #2563eb; font-weight: 800; }
+body.light-mode .count-tien { color: #9a3412; font-weight: 800; }
+
+#fileInput { display: none; }
+
+/* ── LOGIN SCREEN ────────────────────── */
+.login-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.login-overlay.hidden { display: none; }
+.login-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 32px 24px;
+  width: 100%; max-width: 360px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.login-icon { font-size: 48px; margin-bottom: 12px; }
+.login-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.login-sub { font-size: 13px; color: rgba(255,255,255,0.85); margin-bottom: 20px; text-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+.login-input {
+  width: 100%; padding: 12px 14px;
+  background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 10px; color: #fff; font-size: 15px;
+  font-family: 'Inter', sans-serif; outline: none; margin-bottom: 14px;
+  box-sizing: border-box;
+}
+.login-input::placeholder { color: #93c5fd; }
+.login-input:focus { border-color: #60a5fa; }
+.login-btn {
+  width: 100%; padding: 12px;
+  background: linear-gradient(135deg, #fdba74, #fb923c);
+  color: #fff; border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.login-btn:active { transform: scale(0.97); }
+.login-btn:hover { box-shadow: 0 4px 16px rgba(249,115,22,0.5); }
+.login-error { color: #fca5a5; font-size: 13px; margin-top: 10px; font-weight: 600; }
+
+/* ── MAIN ───────────────────────────────── */
+.main { padding: 0 8px calc(100px + env(safe-area-inset-bottom, 0px)); max-width: 1400px; margin: 0 auto; }
+
+.toolbar-top { display: flex; flex-direction: column; gap: 4px; }
+@media (min-width: 640px) {
+  .toolbar-top { flex-direction: row; align-items: stretch; flex-wrap: nowrap; }
+  .toolbar-top .search-box { flex: 0 1 auto; min-width: 0; }
+  .filter-row { flex: 0 0 auto; }
+  .sort-row { flex: 0 0 auto; gap: 6px; }
+  .sort-btn { padding: 10px 10px; font-size: 14px; flex: 0 0 auto; }
+  .sort-btn .sort-arrow { font-size: 14px; }
+  .sort-label { font-size: 14px; }
+}
+
+/* ── WELCOME ────────────────────────────── */
+.welcome-state {
+  text-align: center;
+  padding: 60px 16px;
+}
+.welcome-state .big-icon { font-size: 14px; margin-bottom: 16px; }
+.welcome-state h2 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.welcome-state p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 320px; margin: 0 auto 24px; }
+
+.upload-zone-mobile {
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  cursor: pointer;
+  background: rgba(59,130,246,0.04);
+  transition: background 0.2s;
+}
+.upload-zone-mobile:active { background: rgba(59,130,246,0.1); }
+.upload-zone-mobile p { font-size: 14px; color: var(--text-dim); margin-bottom: 16px; }
+
+.big-upload-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.big-upload-btn:active { background: #2563eb; }
+
+/* ── LOADING ────────────────────────────── */
+.loading { text-align: center; padding: 60px 24px; color: var(--text-dim); }
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 14px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── STATS ──────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 6px 0;
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+}
+.stats-row.collapsed { max-height: 0; opacity: 0; margin: 0; pointer-events: none; }
+.stat-card:first-child { grid-column: 1 / -1; }
+
+.stat-card {
+  background: rgba(71,85,105,0.25);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: center;
+  transition: background-color 0.45s ease, border-color 0.45s ease;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+.stat-value-row { display: flex; align-items: baseline; gap: 7px; min-width: 0; justify-content: center; }
+.stat-value.blue { color: #06b6d4; font-weight: 700; }
+.stat-value.gold { color: #eab308; font-weight: 700; }
+.stat-value.red { color: #e07070; font-weight: 700; }
+.stat-value.green { color: #4ade80; font-weight: 700; }
+.stat-sub { font-size: 14px; font-weight: 600; color: var(--text-dim); white-space: nowrap; }
+
+/* Per-employee stats scope banner */
+.nv-scope {
+  display: none !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.35);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--text);
+  max-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease, padding 0.3s ease, border-width 0.3s ease;
+}
+.nv-scope.collapsed { max-height: 0; opacity: 0; margin: 0; padding-top: 0; padding-bottom: 0; border-width: 0; pointer-events: none; }
+.nv-scope b { color: var(--accent-glow); }
+.nv-scope button {
+  background: rgba(59,130,246,0.15);
+  color: var(--accent-glow);
+  border: 1px solid rgba(59,130,246,0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nv-scope button:active { background: rgba(59,130,246,0.3); }
+
+/* ── TOOLBAR ────────────────────────────── */
+.toolbar {
+  margin: 0;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 150;
+  background: rgba(17,19,24,0.98);
+  transition: background-color 0.45s ease, border-color 0.45s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.toolbar.stuck { border-bottom-color: var(--border); box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+
+.search-box { position: relative; }
+.search-box input {
+  width: 100%;
+  background: rgba(71,85,105,0.35);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 12px 6px 36px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box input::placeholder { color: var(--text-dim); }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 14px; pointer-events: none; }
+
+.filter-row { display: flex; gap: 8px; }
+.filter-select {
+  flex: 1;
+  background: rgba(71,85,105,0.35);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 12px;
+  color: var(--text);
+  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%23e2e8f0'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  min-width: 0;
+}
+.filter-select option {
+  background: var(--navy-mid);
+  color: var(--text);
+}
+.filter-select option:checked {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── RAINBOW BORDER + TEXT ────────────── */
+@keyframes rainbow-border {
+  0%   { border-color: #b83030; box-shadow: 0 0 5px #b8303044; }
+  14%  { border-color: #b87330; box-shadow: 0 0 5px #b8733044; }
+  28%  { border-color: #b8a830; box-shadow: 0 0 5px #b8a83044; }
+  42%  { border-color: #30a850; box-shadow: 0 0 5px #30a85044; }
+  57%  { border-color: #3060b8; box-shadow: 0 0 5px #3060b844; }
+  71%  { border-color: #7830b8; box-shadow: 0 0 5px #7830b844; }
+  85%  { border-color: #b830a0; box-shadow: 0 0 5px #b830a044; }
+  100% { border-color: #b83030; box-shadow: 0 0 5px #b8303044; }
+}
+@keyframes rainbow-text {
+  0%   { color: #c05050; }
+  14%  { color: #c08040; }
+  28%  { color: #c0b840; }
+  42%  { color: #40b868; }
+  57%  { color: #4070c0; }
+  71%  { color: #9050c0; }
+  85%  { color: #c050a0; }
+  100% { color: #c05050; }
+}
+.filter-select.rainbow-active {
+  border: 2px solid #ff0000;
+  animation: rainbow-border 12s linear infinite;
+}
+.filter-select.rainbow-active #filterNhomLabel {
+  animation: rainbow-text 12s linear infinite;
+  font-weight: 800;
+}
+body.light-mode .filter-select.rainbow-active {
+  border: 2px solid #ff0000;
+  animation: rainbow-border 12s linear infinite;
+}
+body.light-mode .filter-select.rainbow-active #filterNhomLabel {
+  animation: rainbow-text 12s linear infinite;
+  font-weight: 800;
+}
+
+/* Sort quick-buttons */
+.sort-row { display: flex; gap: 3px; margin-top: 2px; }
+.sort-btn {
+  flex: 1;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(71,85,105,0.35);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 4px;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  height: 32px;
+}
+.sort-btn .sort-arrow { font-size: 14px; color: var(--text-dim); }
+.sort-btn.active { border-color: #2563eb; background: #2563eb; color: #ffffff; }
+.sort-btn.active .sort-arrow { color: #ffffff; }
+/* Per-button active colors */
+#sortDanhSo.active { border-color: #3b82f6; background: #3b82f6; color: #ffffff; }
+#sortMaKH.active { border-color: #22c55e; background: #22c55e; color: #ffffff; }
+#sortSoGCS.active { border-color: #f97316; background: #f97316; color: #ffffff; }
+#sortTenKH.active { border-color: #a855f7; background: #a855f7; color: #ffffff; }
+#sortDanhSo.active .sort-arrow, #sortMaKH.active .sort-arrow, #sortSoGCS.active .sort-arrow, #sortTenKH.active .sort-arrow { color: #ffffff; }
+.sort-btn:active { background: rgba(59,130,246,0.22); }
+
+.count-info {
+  font-size: 14px;
+  color: var(--text-dim);
+  padding: 0 2px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.count-info span { font-weight: 700; }
+.count-info .count-kh-hd { color: #60a5fa; }
+.count-info .count-tien { color: #fdba74; }
+
+/* ── CARD LIST (mobile view) ─────────────── */
+.card-list { display: flex; flex-direction: column; gap: 6px; }
+
+.kh-card {
+  background: #1a2332;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, background-color 0.45s ease, color 0.45s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.kh-card:active { background: rgba(251,146,60,0.25); border: 2px solid rgba(234,88,12,0.95); transform: scale(0.98); box-shadow: 0 4px 20px rgba(249,115,22,0.6), 0 0 16px rgba(234,88,12,0.4); transition: all 0.1s ease; }
+.kh-card.highlighted { background: rgba(251,146,60,0.25); border-color: rgba(251,146,60,0.5); }
+body.light-mode .kh-card.highlighted { background: #fed7aa; border-color: #ea580c; box-shadow: 0 4px 16px rgba(234,88,12,0.4); }
+
+.kh-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+.kh-danhso-row { display: flex; gap: 6px; align-items: center; margin-bottom: 4px; }
+.kh-danhso { font-size: 14px; color: #e2e8f0; font-weight: 500; }
+.kh-name { font-size: 17px; font-weight: 800; flex: 1; line-height: 1.3; color: #60a5fa; }
+.kh-tien-col { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
+.kh-tien { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #ffa0a0; white-space: nowrap; flex-shrink: 0; }
+.kh-tien.low { color: #4ade80; }
+.kh-tien.mid { color: #fde68a; }
+.mil-digit { color: #ffa0a0; }
+.kh-thang { font-size: 14px; color: #94a3b8; margin-top: 2px; font-weight: 500; }
+
+.kh-ma-line { margin-bottom: 4px; }
+.kh-card-mid { display: flex; gap: 3px; flex-wrap: nowrap; margin-bottom: 5px; align-items: center; overflow: hidden; }
+.kh-ma { font-family: 'Inter', sans-serif; font-size: 14px; color: #e2e8f0; font-weight: 500; white-space: nowrap; }
+.kh-sogcs { font-family: 'Inter', sans-serif; font-size: 14px; color: #94a3b8; font-weight: 500; white-space: nowrap; }
+.kh-phone { font-family: 'Inter', sans-serif; font-size: 14px; color: #94a3b8; font-weight: 500; text-decoration: none; white-space: nowrap; } .kh-phone .phone-icon { color: #ef4444; margin-right: 2px; font-style: normal; }
+.kh-card-mid .badge { font-size: 14px; font-weight: 500; white-space: nowrap; }
+.kh-card-mid .badge-danhso { background: rgba(59,130,246,0.15); color: #fff; }
+.kh-ma-line .badge-danhso { font-size: 14px; padding: 3px 10px; color: #fff; border: none !important; box-shadow: none !important; }
+.kh-sep { font-size: 14px; color: var(--text-dim); font-weight: 400; }
+.kh-ghichu { font-size: 14px; color: #ffffff; font-weight: 500; white-space: nowrap; border: 1px solid rgba(253,186,116,0.25); border-radius: 3px; padding: 0px 4px; }
+.ghi-chu-input { background: rgba(71,85,105,0.35); border: 1.5px solid #fdba74; border-radius: 6px; padding: 8px 12px; color: var(--text); font-size: 14px; font-weight: 300; font-family: 'Inter', sans-serif; width: 100%; outline: none; }
+.ghi-chu-input:not(:placeholder-shown) { color: #4ade80; }
+.ghi-chu-input:focus { border-color: var(--accent); }
+
+.kh-addr-line { font-size: 14px; color: #94a3b8; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.addr-link { color: inherit; text-decoration: none; cursor: pointer; }
+.addr-link:hover { text-decoration: underline; }
+.addr-map-icon { font-size: 12px; margin-left: 3px; opacity: 0.7; }
+.kh-card-bot { display: flex; justify-content: space-between; align-items: center; }
+.kh-nv { font-size: 14px; color: var(--text-dim); }
+.kh-thang { font-size: 14px; color: #94a3b8; font-weight: 500; }
+
+/* Clickable employee name → per-NV stats */
+.nv-link {
+  color: var(--accent-glow);
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  padding: 4px 2px;
+  margin: -4px -2px;
+}
+.nv-link:active { opacity: 0.7; }
+
+
+
+/* ── TABLE (desktop view) ───────────────── */
+.table-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: visible;
+}
+
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; position: relative; }
+table thead th { position: sticky; top: 0; z-index: 10; background: #374151; }
+table thead tr { background: #374151; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+colgroup col:nth-child(1) { width: 3%; }  /* STT */
+colgroup col:nth-child(2) { width: 12%; } /* Mã KH */
+colgroup col:nth-child(3) { width: 14%; } /* Tên KH */
+colgroup col:nth-child(4) { width: 18%; } /* Địa chỉ */
+colgroup col:nth-child(5) { width: 9%; }  /* Mã Số GCS */
+colgroup col:nth-child(6) { width: 8%; }  /* Danh Số */
+colgroup col:nth-child(7) { width: 4%; }  /* Số Pha */
+colgroup col:nth-child(8) { width: 9%; }  /* SĐT */
+colgroup col:nth-child(9) { width: 10%; } /* Số TBi */
+colgroup col:nth-child(10) { width: 7%; } /* Mã Trạm */
+colgroup col:nth-child(11) { width: 5%; } /* Tên Trạm */
+colgroup col:nth-child(12) { width: 3%; } /* Nhóm */
+
+thead th {
+  background: #374151;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #3b82f6;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+thead th:hover { color: #60a5fa; }
+thead th.sorted { color: var(--accent-glow); border-bottom: 2px solid #3b82f6; }
+
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s, background-color 0.45s ease; cursor: pointer; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #1e3a5f; }
+tbody tr:hover td { color: #ffffff !important; }
+tbody tr:hover td .ma-kh { color: #ffffff !important; }
+tbody tr:hover td .phone { color: #ffffff !important; }
+tbody tr:hover td .addr-link { color: #ffffff !important; }
+tbody tr:active { background: #1a2f4f; }
+
+tbody td { padding: 10px 8px; font-size: 14px; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.ma-kh { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--accent-glow); font-weight: 500; }
+.ten-kh { font-size: 15px; font-weight: 500; white-space: nowrap; }
+.ten-kh small { display: block; font-size: 14px; color: var(--text-dim); font-weight: 400; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tien-no { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #ffa0a0; white-space: nowrap; }
+.tien-no.low { color: #4ade80; }
+.tien-no.high { color: #fb923c; }
+.phone { font-family: 'Inter', sans-serif; font-size: 14px; color: #ffffff; }
+.cell-dim { color: var(--text-dim); font-size: 14px; white-space: nowrap; }
+.cell-addr { font-size: 14px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cell-ghi { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ghi-chu-table { background: transparent; border: 1px solid rgba(253,186,116,0.25); border-radius: 4px; padding: 2px 6px; color: var(--text-dim); font-size: 14px; font-family: 'Inter', sans-serif; width: 100%; min-width: 120px; outline: none; }
+.ghi-chu-table:not(:placeholder-shown) { color: #4ade80; }
+.ghi-chu-table:focus { border-color: var(--accent); background: rgba(71,85,105,0.35); }
+.ghi-chu-table::placeholder { color: var(--text-dim); opacity: 0.5; }
+.cell-nv { font-size: 14px; white-space: nowrap; }
+
+/* ── BADGE ──────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.badge-blue { background: rgba(59,130,246,0.15); color: var(--accent-glow); }
+.badge-gold { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.badge-purple { background: rgba(139,92,246,0.15); color: #a78bfa; }
+.badge-teal { background: rgba(20,184,166,0.15); color: #2dd4bf; }
+.badge-rose { background: rgba(244,63,94,0.15); color: #fb7185; }
+.badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+.badge-orange { background: rgba(249,115,22,0.15); color: #fb923c; }
+.badge-gray { background: rgba(148,163,184,0.1); color: var(--text-dim); }
+
+/* ── PAGINATION ─────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.page-info { font-size: 14px; color: var(--text-dim); }
+.page-btns { display: flex; gap: 4px; }
+.page-btn {
+  width: 32px; height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #1e293b;
+  color: var(--text-dim);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.12s;
+  font-family: 'Inter', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+.page-btn:active { background: rgba(255,255,255,0.06); }
+.page-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+.page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ── SUMMARY TABLE ─────────────────────── */
+.summary-wrap {
+  background: rgba(71,85,105,0.25);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.summary-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.summary-table col:nth-child(1) { width: 36px; }
+.summary-table col:nth-child(2) { width: 35%; }
+.summary-table col:nth-child(3) { width: 14%; }
+.summary-table col:nth-child(4) { width: 14%; }
+.summary-table col:nth-child(5) { width: 38%; }
+.summary-table th:nth-child(3),
+.summary-table td:nth-child(3),
+.summary-table th:nth-child(4),
+.summary-table td:nth-child(4),
+.summary-table th:nth-child(5),
+.summary-table td:nth-child(5) { text-align: right; }
+.summary-table th {
+  background: rgba(255,255,255,0.06);
+  padding: 8px 6px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #3b82f6;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.summary-table th:hover { color: var(--accent-glow); }
+.summary-table th.sorted { color: var(--accent-glow); }
+.sa-sum { font-size: 14px; color: var(--text-dim); margin-left: 1px; }
+.summary-table th.sorted .sa-sum { color: var(--accent-glow); }
+.summary-table td {
+  padding: 8px 6px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.summary-table td:nth-child(3),
+.summary-table td:nth-child(4) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-right: 6px;
+}
+.summary-table tr:last-child td { border-bottom: none; }
+.summary-table tr:hover { background: rgba(255,255,255,0.03); }
+.summary-table .tien-no-cell { font-weight: 700; color: #fca5a5; font-family: 'Inter', sans-serif; font-size: 14px; }
+.summary-table .num-cell { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+.summary-table .ten-nv-cell { font-weight: 600; color: var(--text); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.summary-table .stt-cell { color: var(--text-dim); font-size: 14px; }
+.summary-table tfoot td {
+  background: rgba(59,130,246,0.08);
+  font-weight: 700;
+  font-size: 14px;
+  border-top: 2px solid var(--accent);
+  color: var(--accent-glow);
+  padding: 10px 6px;
+  white-space: nowrap;
+  overflow: visible;
+}
+.summary-table tfoot td:first-child {
+  text-align: right;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+}
+
+/* ── EMPTY ──────────────────────────────── */
+.empty-state { text-align: center; padding: 48px 24px; color: var(--text-dim); }
+.empty-state .icon { font-size: 14px; margin-bottom: 10px; }
+.empty-state p { font-size: 14px; }
+
+/* ── MODAL ──────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 300;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: #1a1d24;
+  border: 1px solid var(--border);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);
+  transition: background-color 0.45s ease, border-color 0.45s ease;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* desktop: center modal */
+@media (min-width: 640px) {
+  .modal-overlay { align-items: center; padding: 24px; }
+  .modal { border-radius: 16px; max-height: 80vh; }
+}
+
+@keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-handle {
+  width: 36px; height: 3px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+  margin: 5px auto 0;
+}
+
+.modal-header {
+  padding: 3px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h2 { font-size: 14px; font-weight: 700; line-height: 1.1; }
+.modal-header p { font-size: 14px; color: var(--text-dim); margin-top: 1px; }
+.modal-close {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: var(--text-dim);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.modal-body { padding: 4px 12px 16px; }
+
+.info-row {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.info-row:last-child { border-bottom: none; }
+.info-label { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #94a3b8; min-width: 100px; margin-top: 2px; flex-shrink: 0; }
+.info-value { font-size: 14px; color: var(--text); flex: 1; word-break: break-word; }
+.info-value.dim { color: var(--text-dim); opacity: 0.7; }
+
+
+/* Phone call link */
+.call-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(16,185,129,0.12);
+  color: var(--green);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  margin-top: 4px;
+}
+
+mark { background: rgba(96,165,250,0.3); color: #93c5fd; border-radius: 2px; padding: 0 1px; font-weight: 700; }
+body.light-mode mark { background: rgba(251,191,36,0.35); color: #92400e; font-weight: 700; }
+
+/* ── RESPONSIVE ─────────────────────────── */
+/* Mobile: cards */
+.card-view { display: block; }
+.table-view { display: none; }
+
+/* Mobile-only refinements */
+@media (max-width: 639.98px) {
+  .filter-select { font-size: 14px; padding-top: 6px; padding-bottom: 6px; }
+  .kh-name { font-size: 17px; }
+  .kh-tien { font-size: 14px; }
+  .page-btn { width: 34px; height: 34px; font-size: 14px; }
+  .page-btns { flex-wrap: wrap; justify-content: center; }
+  .modal-close { padding: 10px 12px; font-size: 14px; }
+  .modal { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+/* Desktop: table */
+@media (min-width: 640px) {
+  .card-view { display: none; }
+  .table-view { display: block; }
+  .main { padding: 0 20px 40px; }
+  .stats-row { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .stat-card:first-child { grid-column: auto; }
+  .toolbar { flex-direction: column; gap: 8px; }
+  .search-box { width: 100%; }
+  .toolbar-top { display: flex; gap: 8px; align-items: center; }
+  .toolbar-top .search-box { flex: 0 0 280px; max-width: 280px; }
+  .filter-row { flex: 1; min-width: 0; flex-wrap: nowrap; gap: 0; }
+  .filter-select { flex: 1; min-width: 0; }
+  .header-sub { max-width: 300px; }
+}
+
+@media (min-width: 900px) {
+  .main { padding: 0 12px 40px; max-width: 1600px; }
+  .card-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-overlay">
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <h2 class="login-title">Tổng DSKH 2026</h2>
+    <p class="login-sub">Vui lòng nhập mật khẩu để truy cập</p>
+    <input type="password" id="loginPassword" class="login-input" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Đăng nhập</button>
+    <p id="loginError" class="login-error" style="display:none">Mật khẩu không đúng!</p>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
+    <div>
+      <div class="header-title">Tổng DSKH 2026</div>
+      <div class="header-sub" id="fileLabel">Chưa có dữ liệu</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="upload-btn-header" id="exportBtn" onclick="exportExcel()" style="display:none">
+      <span style="color:#10b981">💾</span> Xuất File
+    </button>
+    <button class="upload-btn-header" onclick="document.getElementById('fileInput').click()">
+      <span style="color:#3b82f6">📂</span> Chọn File
+    </button>
+  </div>
+  <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" onchange="handleFileUpload(this)">
+</div>
+
+<div class="main" id="mainContent">
+
+  <!-- WELCOME -->
+  <div class="welcome-state" id="welcomeState">
+    <div class="big-icon">📊</div>
+    <h2>Tải dữ liệu để bắt đầu</h2>
+    <p>Nhập danh sách nợ khách hàng từ file Excel để xem và tìm kiếm</p>
+    <div class="upload-zone-mobile" onclick="document.getElementById('fileInput').click()">
+      <p>📥 Hỗ trợ .xlsx · .xls · .csv</p>
+      <button class="big-upload-btn" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">📂 Chọn File
+ Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loadingState" style="display:none">
+    <div class="spinner"></div>
+    <p>Đang xử lý dữ liệu...</p>
+  </div>
+
+  <!-- DATA VIEW -->
+  <div id="dataView" style="display:none">
+
+    <!-- Stats -->
+    <!-- Stats -->
+    <div class="stats-row" style="display:none">
+      <div class="stat-card">
+        <div class="stat-label">Tổng nợ</div>
+        <div class="stat-value-row">
+          <div class="stat-value gold tong-no" id="statTongNo">0</div>
+          <div class="stat-sub">VNĐ</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tổng hoá đơn nợ</div>
+        <div class="stat-value blue" id="statTotal">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tổng khách hàng nợ</div>
+        <div class="stat-value green" id="statUnique">0</div>
+      </div>
+    </div>
+
+    <!-- Per-employee scope banner -->
+    <div class="nv-scope" id="nvScope">
+      <span>📊 <b id="nvScopeName"></b></span>
+      <button onclick="clearNvScope()">✕</button>
+    </div>
+
+    <!-- Toolbar (sticky) -->
+    <div class="toolbar">
+      <div class="toolbar-top">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Tìm tên, mã KH, SĐT, địa chỉ..." oninput="handleSearch()" autocomplete="off" autocorrect="off" autocapitalize="off">
+        </div>
+        <div class="filter-row" style="position:relative">
+          <div class="filter-select" id="filterNhomBtn" onclick="toggleNhomDropdown()" style="display:flex;align-items:center;gap:4px;cursor:pointer;position:relative">
+            <span id="filterNhomLabel" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="color:#3b82f6">📁</span> Tất cả các nhóm</span>
+          </div>
+          <div class="nhom-dropdown" id="nhomDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;margin-top:4px;background:var(--navy-mid);border:1px solid var(--border);border-radius:10px;z-index:999;max-height:400px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
+            <div class="nhom-option" data-val="" onclick="selectNhom('')" style="padding:8px 12px;cursor:pointer;font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border)" onmouseenter="this.style.background='rgba(59,130,246,0.15)'" onmouseleave="this.style.background=''" ><span style="color:#3b82f6">📁</span> Tất cả các nhóm</div>
+          </div>
+          <input type="hidden" id="filterNhom" value="">
+        </div>
+      </div>
+        <div class="sort-row">
+          <button class="sort-btn" id="sortDanhSo" onclick="sortBy('danh_so')">
+            <span class="sort-label">Danh Số</span><span class="sort-arrow">↕</span>
+          </button>
+          <button class="sort-btn" id="sortMaKH" onclick="sortBy('ma_khach_hang')">
+            <span class="sort-label">Mã KH</span><span class="sort-arrow">↕</span>
+          </button>
+          <button class="sort-btn" id="sortSoGCS" onclick="sortBy('ma_sogcs')">
+            <span class="sort-label">Mã Sổ</span><span class="sort-arrow">↕</span>
+          </button>
+          <button class="sort-btn" id="sortTenKH" onclick="sortBy('ten_khach_hang')">
+            <span class="sort-label">Tên KH</span><span class="sort-arrow">↕</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="count-info" id="countInfoBar" style="display:none;text-align:left;padding:8px 0 4px;font-size:14px;font-weight:700;border-bottom:1px solid var(--border);margin-bottom:6px">
+      <span id="countKHBarFiltered" style="color:#60a5fa"></span><span id="countKHBarTotal" style="color:#fbbf24"></span>
+    </div>
+
+    <!-- DETAIL VIEW (Sheet 1) -->
+    <div id="detailView">
+
+    <!-- MOBILE: Card list -->
+    <div class="card-view">
+      <div class="card-list" id="cardList"></div>
+      <div id="emptyStateCard" class="empty-state" style="display:none">
+        <div class="icon">🔎</div><p>Không tìm thấy kết quả</p>
+      </div>
+      <div class="pagination" id="paginationCard">
+        <div class="page-info" id="pageInfoCard"></div>
+        <div class="page-btns" id="pageBtnsCard"></div>
+      </div>
+    </div>
+
+    <!-- DESKTOP: Table -->
+    <div class="table-view">
+      <div class="table-wrap">
+        <div class="table-scroll"><table>
+              <colgroup>
+                <col><col><col><col><col><col><col><col><col><col><col><col>
+              </colgroup>
+              <thead>
+              <tr>
+                <th onclick="sortBy('stt')">STT <span class="sa" data-col="stt">↕</span></th>
+                <th onclick="sortBy('ma_khach_hang')">Mã KH <span class="sa" data-col="ma_khach_hang">↕</span></th>
+                <th onclick="sortBy('ten_khach_hang')">Tên KH <span class="sa" data-col="ten_khach_hang">↕</span></th>
+                <th onclick="sortBy('dia_chi')">Địa chỉ <span class="sa" data-col="dia_chi">↕</span></th>
+                <th onclick="sortBy('ma_sogcs')">Mã Số GCS <span class="sa" data-col="ma_sogcs">↕</span></th>
+                <th onclick="sortBy('danh_so')">Danh Số <span class="sa" data-col="danh_so">↕</span></th>
+                <th onclick="sortBy('so_pha')">Số Pha <span class="sa" data-col="so_pha">↕</span></th>
+                <th onclick="sortBy('dien_thoai')">SĐT <span class="sa" data-col="dien_thoai">↕</span></th>
+                <th onclick="sortBy('so_tbi')">Số TBi <span class="sa" data-col="so_tbi">↕</span></th>
+                <th onclick="sortBy('ma_tram')">Mã Trạm <span class="sa" data-col="ma_tram">↕</span></th>
+                <th onclick="sortBy('ten_tram')">Tên Trạm <span class="sa" data-col="ten_tram">↕</span></th>
+                <th onclick="sortBy('ma_nhom')">Nhóm <span class="sa" data-col="ma_nhom">↕</span></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+        <div id="emptyStateTable" class="empty-state" style="display:none">
+          <div class="icon">🔎</div><p>Không tìm thấy kết quả</p>
+        </div>
+        <div class="pagination" id="paginationTable">
+          <div class="page-info" id="pageInfoTable"></div>
+          <div class="page-btns" id="pageBtnsTable"></div>
+        </div>
+      </div>
+    </div>
+
+    </div> <!-- end detailView -->
+
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header" id="modalHeader">
+      <div>
+        <h2 id="modalName">Tên khách hàng</h2>
+        <p id="modalMa">Mã KH</p>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+let allData = [], filtered = [], summaryData = [];
+let nvScope = '';
+let sortCol = 'ma_khach_hang', sortDir = 1;
+let currentPage = 1;
+let originalFileName = 'DSKH.xlsx';
+const PAGE_SIZE = 50;
+let _searchTimer = null;
+let _rafId = null;
+const SAVE_KEY = 'qlno_data_v1';
+const DB_NAME = 'qlno_db';
+const LOGIN_PASSWORD = '123654';
+const LOGIN_KEY = 'qlno_logged_in';
+
+function doLogin() {
+  const pw = document.getElementById('loginPassword').value;
+  if (pw === LOGIN_PASSWORD) {
+    sessionStorage.setItem(LOGIN_KEY, '1');
+    document.getElementById('loginScreen').classList.add('hidden');
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginPassword').focus();
+  }
+}
+// Auto-hide login if already logged in this session
+(function() {
+  if (sessionStorage.getItem(LOGIN_KEY)) {
+    const el = document.getElementById('loginScreen');
+    if (el) el.classList.add('hidden');
+  }
+})();
+const DB_STORE = 'qlno_data';
+const DB_KEY = 'qlno_data';
+
+// ── Storage helpers: gzip-compressed localStorage → IndexedDB fallback ──
+function bytesToBase64(bytes) {
+  let bin = '';
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+  }
+  return btoa(bin);
+}
+function base64ToBytes(b64) {
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+async function compressString(str) {
+  if (typeof CompressionStream === 'undefined') return null;
+  const stream = new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+async function decompressBytes(bytes) {
+  if (typeof DecompressionStream === 'undefined') return null;
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+  return new TextDecoder().decode(await new Response(stream).arrayBuffer());
+}
+function openDB() {
+  return new Promise((resolve, reject) => {
+    if (!('indexedDB' in window)) return reject(new Error('IndexedDB không khả dụng'));
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => { req.result.createObjectStore(DB_STORE); };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+function dbSet(value) {
+  return openDB().then(db => new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).put(value, DB_KEY);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  }));
+}
+function dbGet() {
+  return openDB().then(db => new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readonly');
+    const req = tx.objectStore(DB_STORE).get(DB_KEY);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  }));
+}
+function dbClear() {
+  return openDB().then(db => new Promise(resolve => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).delete(DB_KEY);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => resolve();
+  }));
+}
+
+// ── THEME TOGGLE ──────────────────────────
+function toggleTheme() {
+  // Flash overlay for smooth transition
+  const flash = document.createElement('div');
+  flash.style.cssText = 'position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;transition:opacity 0.45s ease;background:rgba(0,0,0,0.15);';
+  document.body.appendChild(flash);
+  requestAnimationFrame(() => { flash.style.opacity = '1'; });
+  setTimeout(() => { flash.style.opacity = '0'; }, 50);
+  setTimeout(() => { flash.remove(); }, 500);
+
+  document.body.classList.toggle('light-mode');
+  const isLight = document.body.classList.contains('light-mode');
+  document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('qlno_theme', isLight ? 'light' : 'dark');
+}
+
+// Restore theme on load
+(function() {
+  const saved = localStorage.getItem('qlno_theme');
+  if (saved === 'light') {
+    document.body.classList.add('light-mode');
+    setTimeout(() => { const btn = document.getElementById('themeToggle'); if (btn) btn.textContent = '☀️'; }, 100);
+  }
+})();
+
+// Persist the parsed data: compressed into localStorage, IndexedDB as fallback
+async function saveData() {
+  const payload = {
+    name: document.getElementById('fileLabel').textContent,
+    fileName: originalFileName,
+    data: allData,
+    summary: summaryData
+  };
+  try {
+    const json = JSON.stringify(payload);
+    const compressed = await compressString(json);
+    // Strategy 1: gzip-compressed JSON in localStorage ('c:' marker)
+    if (compressed) {
+      try {
+        localStorage.setItem(SAVE_KEY, 'c:' + bytesToBase64(compressed));
+        dbClear().catch(() => {});
+        return;
+      } catch(e) { /* quota exceeded — fall through */ }
+    }
+    // Strategy 2: plain JSON in localStorage (small files, no CompressionStream)
+    try {
+      localStorage.setItem(SAVE_KEY, 'j:' + json);
+      dbClear().catch(() => {});
+      return;
+    } catch(e) { /* quota exceeded — fall through */ }
+  } catch(e) {
+    console.warn('Không thể nén/lưu dữ liệu:', e);
+  }
+  // Strategy 3: IndexedDB — handles very large files
+  try {
+    await dbSet(payload);
+    try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
+  } catch(e) {
+    console.warn('Không thể lưu dữ liệu vào bộ nhớ:', e);
+  }
+}
+
+async function clearSavedData() {
+  try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
+  try { localStorage.removeItem(HIGHLIGHT_KEY); } catch(e) {}
+  try { await dbClear(); } catch(e) {}
+  allData = []; filtered = [];
+  nvScope = ''; currentPage = 1;
+
+
+  document.getElementById('fileLabel').textContent = 'Chưa có dữ liệu';
+  document.getElementById('dataView').style.display = 'none';
+  document.getElementById('welcomeState').style.display = 'block';
+  document.querySelector('.stats-row').classList.remove('collapsed');
+  document.getElementById('nvScope').classList.remove('collapsed');
+  updateStats();
+}
+
+// Restore previously saved data on page load (async)
+async function restoreData() {
+  let saved = null;
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (raw) {
+      if (raw.startsWith('c:')) {
+        const json = await decompressBytes(base64ToBytes(raw.slice(2)));
+        saved = json ? JSON.parse(json) : null;
+      } else if (raw.startsWith('j:')) {
+        saved = JSON.parse(raw.slice(2));
+      } else {
+        saved = JSON.parse(raw); // legacy plain JSON
+      }
+    }
+  } catch(e) { saved = null; }
+  if (!saved || !Array.isArray(saved.data) || saved.data.length === 0) {
+    // Fallback: IndexedDB
+    try { saved = await dbGet(); } catch(e) { saved = null; }
+  }
+  if (!saved || !Array.isArray(saved.data) || saved.data.length === 0) return;
+  allData = saved.data;
+  rebuildSearchIndex(allData);
+  summaryData = saved.summary || [];
+  originalFileName = saved.fileName || 'DSKH.xlsx';
+  document.getElementById('fileLabel').textContent = (saved.name || '').replace(/\s*·\s*[\d.,]+\s*bản ghi/, '') || originalFileName;
+
+
+  document.getElementById('welcomeState').style.display = 'none';
+  document.getElementById('dataView').style.display = 'block';
+  document.getElementById('exportBtn').style.display = 'flex';
+  loadGhiChu(); initFilters(); updateStats(); applyFilters();
+  if (!summaryData.length) computeSummaryFromDetail();
+  else renderSummary();
+}
+
+const nhomColors = {
+  'BR01':'badge-green','BR02':'badge-teal','BR03':'badge-blue',
+  'BR04':'badge-gold','BR05':'badge-purple','BR06':'badge-rose',
+  'PM05':'badge-orange','PM06':'badge-gray'
+};
+
+function getBadge(nhom) {
+  if (!nhom) return 'badge-gray';
+  return nhomColors[nhom.substring(0,4)] || 'badge-gray';
+}
+
+function fmt(n) {
+  if (!n || isNaN(n)) return '0';
+  return Math.round(n).toLocaleString('vi-VN');
+}
+function fmtHtml(n) {
+  const s = fmt(n);
+  // For amounts 1,000,000 - 1,999,999: highlight the millions digit
+  if (n >= 1000000 && n < 2000000 && s.length > 0) {
+    return '<span class="mil-digit">' + s.charAt(0) + '</span>' + s.slice(1);
+  }
+  return s;
+}
+
+// Parse amounts that may arrive as text in VN format: "1.234.567" or "1.234,56"
+function parseVnNumber(s) {
+  if (typeof s === 'number') return isNaN(s) ? 0 : s;
+  s = String(s ?? '').trim();
+  if (!s) return 0;
+  if (s.includes(',')) s = s.replace(/\./g, '').replace(/,/g, '.');
+  else s = s.replace(/\./g, '');
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+}
+// HTML-escape data coming from Excel before injecting into the page
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+// Lowercase without Vietnamese diacritics, for tolerant searching
+function normVn(s) { return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
+function buildSearchHaystack(r) {
+  return normVn((r.stt||'')+(r.ma_khach_hang||'')+(r.ten_khach_hang||'')+(r.dia_chi||'')+(r.ma_sogcs||'')+(r.danh_so||'')+(r.dien_thoai||'')+(r.thang_no||'')+(r.so_tbi||'')+(r.ghi_chu||'')+(r.nhan_vien||'')+(r.dinh_vi||''));
+}
+function rebuildSearchIndex(arr) { for (let i = 0; i < arr.length; i++) arr[i]._search = buildSearchHaystack(arr[i]); }
+function hi(text, q) {
+  if (text == null || text === '') return '';
+  const t = esc(text);
+  if (!q) return t;
+  const escRe = esc(q).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return t.replace(new RegExp(escRe, 'gi'), m => `<mark>${m}</mark>`);
+}
+// Parse coordinates from ĐỊNH VỊ field (supports "lat,lng", "lat lng", "lat/lng")
+function parseCoords(s) {
+  if (!s) return null;
+  const m = String(s).match(/([\-]?\d+\.\d+)\s*[,;\/\s]\s*([\-]?\d+\.\d+)/);
+  if (m) {
+    const lat = parseFloat(m[1]), lng = parseFloat(m[2]);
+    if (lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) return { lat, lng };
+  }
+  return null;
+}
+function mapsUrl(r) {
+  const c = parseCoords(r.dinh_vi);
+  if (c) return `https://www.google.com/maps?q=${c.lat},${c.lng}`;
+  if (r.dia_chi) return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.dia_chi)}`;
+  return '#';
+}
+
+function handleFileUpload(inp) {
+  if (inp.files[0]) {
+    processFile(inp.files[0]);
+    inp.value = ''; // allow re-selecting the same file later
+  }
+}
+
+function processFile(file) {
+  originalFileName = file.name;
+  document.getElementById('welcomeState').style.display = 'none';
+  document.getElementById('loadingState').style.display = 'block';
+  document.getElementById('dataView').style.display = 'none';
+  document.getElementById('fileLabel').textContent = file.name;
+
+  // Reset all state carried over from a previous file
+  nvScope = '';
+  currentPage = 1;
+  sortCol = 'ma_khach_hang'; sortDir = 1;
+  document.getElementById('searchInput').value = '';
+  document.querySelector('.stats-row').classList.remove('collapsed');
+  document.getElementById('nvScope').classList.remove('collapsed');
+  document.getElementById('filterNhom').value = '';
+  document.getElementById('filterNhomLabel').innerHTML = '<span style="color:#3b82f6">📁</span> Tất cả các nhóm';
+  const fnb1 = document.getElementById('filterNhomBtn'); if(fnb1){fnb1.style.border='';fnb1.style.boxShadow='';fnb1.classList.remove('rainbow-active');}
+  updateSortButtons();
+  document.querySelectorAll('.sa').forEach(el => { el.textContent = '↕'; el.closest('th').classList.remove('sorted'); });
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      if (typeof XLSX === 'undefined') throw new Error('Thư viện đọc Excel chưa được tải (kiểm tra kết nối mạng rồi thử lại).');
+      const wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, {defval:''});
+      const keys = Object.keys(rows[0] || {});
+      console.log('Excel columns:', keys);
+
+      function fc(...names) {
+        for (const n of names) {
+          const f = keys.find(k =>
+            k.trim().toUpperCase()===n.toUpperCase() ||
+            k.replace(/[_\s]/g,'').toUpperCase()===n.replace(/[_\s]/g,'').toUpperCase()
+          );
+          if (f) return f;
+        }
+        return null;
+      }
+
+      const cStt    = fc('STT');
+      const cMa    = fc('MA_KHANG','MAKHANG','MA KH','MAKH');
+      const cTen   = fc('TEN_KHANG','TENKHANG','TEN KH','TENKH');
+      const cDchi  = fc('DCHI_KHANG','DCHIKHANG','DIA CHI','DIACHI');
+      const cSoGcs = fc('MA_SOGCS','MASOGCS','MA SO GCS');
+      const cDanhSo= fc('DANH SỐ','DANH SO','DANHSO');
+      const cDt    = fc('DTHOAI_DVU','DTHOAIDVU','SĐT','SDT','DIEN THOAI');
+      const cThang = fc('THANG NO','THANGNO','THANG_NO','THANG');
+      const cTien  = fc('TIEN NO','TIENNO','TIEN_NO','TIỀN NỢ');
+      const cSoTbi = fc('SO_TBI','SOTBI','SO TBI');
+      const cGhiChu= fc('GHI CHU','GHICHU','GHI CHÚ');
+      const cNV    = fc('NV','NHAN VIEN','NHANVIEN');
+      const cNhom  = fc('NHÓM','NHOM','MA NHOM','MANHOM');
+      const cMaNhom= fc('MA NHOM','MANHOM','MA_NHOM');
+      const cSoPha = fc('SOPHA','SO_PHA','SO PHA');
+      const cMaTram= fc('MATRAM','MA_TRAM','MA TRAM');
+      const cTenTram= fc('TENTRAM','TEN_TRAM','TEN TRAM');
+const cDinhVi= fc('DINH VI','DINHVI','ĐỊNH VỊ','DINH_VI','DINHVI_TOA_DO');
+
+      allData = rows.map(r => ({
+        stt: String(r[cStt]||'').trim(),
+        ma_khach_hang: String(r[cMa]||'').trim(),
+        ten_khach_hang: String(r[cTen]||'').trim(),
+        dia_chi: String(r[cDchi]||'').trim(),
+        ma_sogcs: String(r[cSoGcs]||'').trim(),
+        danh_so: String(r[cDanhSo]||'').trim(),
+        thang_no: String(r[cThang]||'').trim(),
+        tien_no: parseVnNumber(r[cTien]),
+        dien_thoai: String(r[cDt]||'').trim().replace(/\.0$/,''),
+        so_tbi: String(r[cSoTbi]||'').trim(),
+        ghi_chu: String(r[cGhiChu]||'').trim(),
+        nhan_vien: String(r[cNV]||'').trim(),
+        ma_nhom: String(r[cMaNhom]||r[cNhom]||'').trim(),
+        so_pha: String(r[cSoPha]||'').trim(),
+        ma_tram: String(r[cMaTram]||'').trim(),
+        ten_tram: String(r[cTenTram]||'').trim(),
+        dinh_vi: String(r[cDinhVi]||'').trim(),
+      })).filter(r => r.ma_khach_hang || r.ten_khach_hang);
+      rebuildSearchIndex(allData);
+
+      document.getElementById('fileLabel').textContent = file.name;
+
+      // Read Sheet 2 (summary)
+      summaryData = [];
+      if (wb.SheetNames.length > 1) {
+        const ws2 = wb.Sheets[wb.SheetNames[1]];
+        const rows2 = XLSX.utils.sheet_to_json(ws2, {defval:''});
+        const keys2 = Object.keys(rows2[0] || {});
+        function fc2(...names) {
+          for (const n of names) {
+            const f = keys2.find(k =>
+              k.trim().toUpperCase()===n.toUpperCase() ||
+              k.replace(/[_\s]/g,'').toUpperCase()===n.replace(/[_\s]/g,'').toUpperCase()
+            );
+            if (f) return f;
+          }
+          return null;
+        }
+        const sStt = fc2('STT');
+        const sNhom = fc2('NHÓM','NHOM','TÊN NHÓM','TEN NHOM');
+        const sHd = fc2('HOÁ ĐƠN','HOA DON','HÓA ĐƠN','HOADON');
+        const sKh = fc2('KHÁCH HÀNG','KHACH HANG','KHACHHANG');
+        const sTien = fc2('TIỀN NỢ','TIEN NO','TIENNO','TIEN_NỢ');
+        summaryData = rows2.map(r => ({
+          stt: String(r[sStt]||'').trim(),
+          ten_nhom: String(r[sNhom]||'').trim(),
+          hoa_don: parseVnNumber(r[sHd]),
+          khach_hang: parseVnNumber(r[sKh]),
+          tien_no: parseVnNumber(r[sTien]),
+        })).filter(r => r.ten_nhom);
+        renderSummary();
+      }
+
+      loadGhiChu(); initFilters(); updateStats(); applyFilters();
+      saveData();
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('dataView').style.display = 'block';
+      document.getElementById('exportBtn').style.display = 'flex';
+    } catch(err) {
+      alert('Lỗi: ' + err.message);
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('welcomeState').style.display = 'block';
+    }
+  };
+  reader.onerror = function() {
+    alert('Không thể đọc file. Vui lòng thử lại.');
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('welcomeState').style.display = 'block';
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ── COMPUTE SUMMARY FROM DETAIL (Sheet 1) ──
+function computeSummaryFromDetail() {
+  const map = {};
+  allData.forEach(r => {
+    const nv = r.nhan_vien || r.ma_nhom || 'Không rõ';
+    if (!map[nv]) map[nv] = { ten_nhom: nv, hoa_don: 0, khach_hang: new Set(), tien_no: 0 };
+    map[nv].hoa_don++;
+    map[nv].khach_hang.add(r.ma_khach_hang);
+    map[nv].tien_no += r.tien_no;
+  });
+  summaryData = Object.values(map)
+    .map((r, i) => ({ stt: i + 1, ten_nhom: r.ten_nhom, hoa_don: r.hoa_don, khach_hang: r.khach_hang.size, tien_no: r.tien_no }))
+    .sort((a, b) => b.tien_no - a.tien_no);
+  summaryData.forEach((r, i) => r.stt = i + 1);
+  renderSummary();
+}
+
+// ── SORT SUMMARY ──
+let sumSortCol = 'tien_no', sumSortDir = -1;
+function sortSummary(col) {
+  if (sumSortCol === col) sumSortDir *= -1; else { sumSortCol = col; sumSortDir = col === 'ten_nhom' ? 1 : -1; }
+  summaryData.sort((a, b) => {
+    let av = a[col], bv = b[col];
+    if (typeof av === 'string') return av.localeCompare(bv, 'vi') * sumSortDir;
+    return (av - bv) * sumSortDir;
+  });
+  summaryData.forEach((r, i) => r.stt = i + 1);
+  document.querySelectorAll('.sa-sum').forEach(el => {
+    const c = el.dataset.col;
+    el.textContent = c === sumSortCol ? (sumSortDir === 1 ? '↑' : '↓') : '↕';
+    el.closest('th').classList.toggle('sorted', c === sumSortCol);
+  });
+  renderSummaryBody();
+}
+
+// ── RENDER SUMMARY (Sheet 2) ──
+function renderSummary() {
+  if (summaryData.length && sumSortCol === 'tien_no' && sumSortDir === -1) {
+    summaryData.sort((a, b) => b.tien_no - a.tien_no);
+    summaryData.forEach((r, i) => r.stt = i + 1);
+  }
+  renderSummaryBody();
+}
+
+function abbreviateName(name) {
+  const parts = name.trim().split(/\s+/);
+  return parts.length > 1
+    ? parts.slice(0, -1).map(w => w[0]).join('') + ' ' + parts[parts.length - 1]
+    : name;
+}
+
+function renderSummaryBody() {
+  const tbody = document.getElementById('summaryBody');
+  const tfoot = document.getElementById('summaryFoot');
+  if (!summaryData.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-dim);padding:24px">Không có dữ liệu sheet 2</td></tr>'; tfoot.style.display = 'none'; return; }
+  let totalHd = 0, totalKh = 0, totalTien = 0;
+  tbody.innerHTML = summaryData.map((r, i) => {
+    totalHd += r.hoa_don;
+    totalKh += r.khach_hang;
+    totalTien += r.tien_no;
+    return `<tr>
+      <td class="ten-nv-cell">${esc(abbreviateName(r.ten_nhom))}</td>
+      <td class="num-cell">${r.hoa_don.toLocaleString('vi-VN')}</td>
+      <td class="num-cell">${r.khach_hang.toLocaleString('vi-VN')}</td>
+      <td class="tien-no-cell" style="text-align:right">${fmt(r.tien_no)}</td>
+    </tr>`;
+  }).join('');
+  tfoot.style.display = '';
+  document.getElementById('sumTotalHd').textContent = totalHd.toLocaleString('vi-VN');
+  document.getElementById('sumTotalKh').textContent = totalKh.toLocaleString('vi-VN');
+  document.getElementById('sumTotalTien').textContent = fmt(totalTien);
+}
+
+function toggleNhomDropdown() {
+  const dd = document.getElementById('nhomDropdown');
+  dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+}
+function nhomColor(name) {
+  if (!name) return '#3b82f6';
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+  const hue = ((h % 360) + 360) % 360;
+  return `hsl(${hue}, 70%, 65%)`;
+}
+function selectNhom(val) {
+  document.getElementById('filterNhom').value = val;
+  const label = document.getElementById('filterNhomLabel');
+  const btn = document.getElementById('filterNhomBtn');
+  const c = val ? nhomColor(val) : '#3b82f6';
+  label.innerHTML = val
+    ? `<span style="color:${c}">👨‍💼</span> ` + val
+    : '<span style="color:#3b82f6">📁</span> Tất cả các nhóm';
+  if (val) {
+    btn.style.border = '';
+    btn.style.boxShadow = '';
+    btn.classList.add('rainbow-active');
+  } else {
+    btn.style.border = '';
+    btn.style.boxShadow = '';
+    btn.classList.remove('rainbow-active');
+  }
+  document.getElementById('nhomDropdown').style.display = 'none';
+  handleNhomFilter();
+}
+function initFilters() {
+  const nhomSet = [...new Set(allData.map(r=>r.ma_nhom).filter(Boolean))].sort();
+  const dd = document.getElementById('nhomDropdown');
+  // keep the first option (Tất cả)
+  dd.innerHTML = '<div class="nhom-option" data-val="" style="padding:8px 12px;cursor:pointer;font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);user-select:none;-webkit-user-select:none" onmouseenter="this.style.background=\'rgba(59,130,246,0.15)\'" onmouseleave="this.style.background=\'\'" ><span style="color:#3b82f6">📁</span> Tất cả các nhóm</div>';
+  nhomSet.forEach(v => {
+    const d = document.createElement('div');
+    d.className = 'nhom-option';
+    d.setAttribute('data-val', v);
+    d.style.cssText = 'padding:8px 12px;cursor:pointer;font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);user-select:none;-webkit-user-select:none';
+    d.onmouseenter = function(){ this.style.background='rgba(59,130,246,0.15)'; };
+    d.onmouseleave = function(){ this.style.background=''; };
+    d.innerHTML = `<span style="color:${nhomColor(v)}">👨‍💼</span> ` + v;
+    dd.appendChild(d);
+  });
+}
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('nhomDropdown');
+  const btn = document.getElementById('filterNhomBtn');
+  // Event delegation for dropdown options
+  const option = e.target.closest('.nhom-option');
+  if (option && dd && dd.contains(option)) {
+    e.stopPropagation();
+    const val = option.getAttribute('data-val') || '';
+    selectNhom(val);
+    return;
+  }
+  if (dd && !dd.contains(e.target) && !btn.contains(e.target)) dd.style.display = 'none';
+});
+
+function updateStats() {
+  const nhom = document.getElementById('filterNhom').value;
+  // Mirror applyFilters: apply group AND employee scope together
+  const src = allData.filter(r => (!nhom || r.ma_nhom === nhom) && (!nvScope || r.nhan_vien === nvScope));
+  const total = src.length;
+  const unique = new Set(src.map(r=>r.ma_khach_hang)).size;
+  const tongNo = src.reduce((s,r)=>s+r.tien_no,0);
+  document.getElementById('statTotal').textContent = total.toLocaleString('vi-VN');
+  document.getElementById('statTongNo').textContent = fmt(tongNo);
+  document.getElementById('statUnique').textContent = unique.toLocaleString('vi-VN');
+  // Update count bar between sort buttons and cards
+  const countBar = document.getElementById('countInfoBar');
+  const countBarFiltered = document.getElementById('countKHBarFiltered');
+  const countBarTotal = document.getElementById('countKHBarTotal');
+  if (allData.length > 0) {
+    countBar.style.display = 'block';
+    const totalAll = new Set(allData.map(r=>r.ma_khach_hang)).size;
+    // Compute search-filtered unique count
+    const q = normVn(document.getElementById('searchInput').value);
+    let searchUnique = unique;
+    if (q) {
+      const searchFiltered = src.filter(r => {
+        if (/^\d+$/.test(q)) {
+          const tail6 = s => { const d = (s||'').replace(/\D/g,''); return d.slice(-6); };
+          return [r.ma_khach_hang, r.ma_sogcs, r.danh_so, r.dien_thoai, r.so_tbi].some(f => tail6(f) === q);
+        }
+        return r._search && r._search.includes(q);
+      });
+      searchUnique = new Set(searchFiltered.map(r=>r.ma_khach_hang)).size;
+    }
+    if (q && (nvScope || nhom)) {
+      countBarFiltered.textContent = searchUnique.toLocaleString('vi-VN') + ' KH / ' + unique.toLocaleString('vi-VN') + ' KH / ';
+      countBarTotal.textContent = 'Tổng ' + totalAll.toLocaleString('vi-VN') + ' KH';
+    } else if (q) {
+      countBarFiltered.textContent = searchUnique.toLocaleString('vi-VN') + ' KH / ';
+      countBarTotal.textContent = 'Tổng ' + totalAll.toLocaleString('vi-VN') + ' KH';
+    } else if (nvScope || nhom) {
+      countBarFiltered.textContent = unique.toLocaleString('vi-VN') + ' KH / ';
+      countBarTotal.textContent = 'Tổng ' + totalAll.toLocaleString('vi-VN') + ' KH';
+    } else {
+      countBarFiltered.textContent = '';
+      countBarTotal.textContent = 'Tổng ' + totalAll.toLocaleString('vi-VN') + ' KH';
+    }
+  } else {
+    countBar.style.display = 'none';
+  }
+  // Scope banner removed - always hidden
+  const scope = document.getElementById('nvScope');
+  scope.style.display = 'none';
+}
+
+function handleSearch() {
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(() => {
+    currentPage = 1;
+    if (_rafId) cancelAnimationFrame(_rafId);
+    _rafId = requestAnimationFrame(() => {
+      applyFilters();
+      const searching = document.getElementById('searchInput').value.trim().length > 0;
+      document.querySelector('.stats-row').classList.toggle('collapsed', searching);
+      document.getElementById('nvScope').classList.toggle('collapsed', searching);
+    });
+  }, 250);
+}
+function handleFilter() { currentPage=1; applyFilters(); }
+
+function applyFilters() {
+  const q = normVn(document.getElementById('searchInput').value);
+  const nhom = document.getElementById('filterNhom').value;
+
+  filtered = allData.filter(r => {
+    if (nhom && r.ma_nhom !== nhom) return false;
+    if (nvScope && r.nhan_vien !== nvScope) return false;
+    if (q) {
+      if (/^\d+$/.test(q)) {
+        const tail6 = s => { const d = (s||'').replace(/\D/g,''); return d.slice(-6); };
+        const match = [r.ma_khach_hang, r.ma_sogcs, r.danh_so, r.dien_thoai, r.so_tbi].some(f => tail6(f) === q);
+        if (!match) return false;
+      } else {
+        if (r._search && !r._search.includes(q)) return false;
+      }
+    }
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    let av=a[sortCol], bv=b[sortCol];
+    if (sortCol==='stt'||sortCol==='so_tbi') { const an=parseFloat(av)||0, bn=parseFloat(bv)||0; return (an-bn)*sortDir; }
+    if (sortCol==='danh_so') { return String(av||'').localeCompare(String(bv||''),'vi')*sortDir; }
+    if (sortCol==='thang_no') {
+      // Parse month strings like '1-7/2026', '08/2026', '8/2026' → Date for proper chronological sort
+      const parseM = s => { if (!s) return 0; const m = String(s).match(/(\d+)(?:[-\/](?:\d+[-\/])?)?(\d{4})/); return m ? new Date(+m[2], +m[1]-1).getTime() : 0; };
+      return (parseM(av)-parseM(bv))*sortDir;
+    }
+    if (typeof av==='number') return (av-bv)*sortDir;
+    return String(av).localeCompare(String(bv),'vi')*sortDir;
+  });
+
+  // Group by ma_khach_hang in detail tab: sum tien_no per customer
+  // Calculate stats BEFORE grouping (to get original invoice count)
+  const origInvoiceCount = filtered.length;
+  const origUniqueKH = new Set(filtered.map(r => r.ma_khach_hang || r.ten_khach_hang));
+  const origTongTien = filtered.reduce((sum, r) => sum + (r.tien_no || 0), 0);
+
+  {
+    const groupMap = {};
+    const groupOrder = [];
+    filtered.forEach(r => {
+      const key = r.ma_khach_hang || r.ten_khach_hang || ('_row_' + Math.random());
+      if (!groupMap[key]) {
+        groupMap[key] = { ...r, tien_no: 0, _count: 0 };
+        groupOrder.push(key);
+      }
+      groupMap[key].tien_no += r.tien_no;
+      groupMap[key]._count++;
+      // Merge thang_no for grouped display
+      if (r.thang_no && groupMap[key].thang_no !== r.thang_no) {
+        groupMap[key].thang_no = groupMap[key].thang_no ? groupMap[key].thang_no + ', ' + r.thang_no : r.thang_no;
+      }
+    });
+    filtered = groupOrder.map(k => groupMap[k]);
+  }
+
+  const q2 = document.getElementById('searchInput').value.trim();
+  renderCards(q2);
+  renderTable(q2);
+  renderPagination();
+  updateStats();
+  restoreHighlights();
+}
+
+function sortBy(col) {
+  if (sortCol===col) sortDir*=-1; else { sortCol=col; sortDir=-1; }
+  document.querySelectorAll('.sa').forEach(el => {
+    const c = el.dataset.col;
+    el.textContent = c===sortCol ? (sortDir===1?'↑':'↓') : '↕';
+    el.closest('th').classList.toggle('sorted', c===sortCol);
+  });
+  updateSortButtons();
+  currentPage=1; applyFilters();
+}
+
+// Sync the two quick sort buttons with the current sort state
+function updateSortButtons() {
+  const map = { 'danh_so':'sortDanhSo', 'ma_khach_hang':'sortMaKH', 'thang_no':'sortThang', 'ma_sogcs':'sortSoGCS', 'ten_khach_hang':'sortTenKH' };
+  Object.entries(map).forEach(([col, id]) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    const arrow = btn.querySelector('.sort-arrow');
+    const active = sortCol===col;
+    btn.classList.toggle('active', active);
+    arrow.textContent = active ? (sortDir===1?'↑':'↓') : '↕';
+  });
+}
+updateSortButtons();
+
+
+
+// CARDS (mobile)
+function renderCards(q='') {
+  const start = (currentPage-1)*PAGE_SIZE;
+  const pageData = filtered.slice(start, start+PAGE_SIZE);
+  const list = document.getElementById('cardList');
+  const empty = document.getElementById('emptyStateCard');
+
+  if (filtered.length===0) { list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+
+  list.innerHTML = pageData.map((r,i) => {
+    const phone = r.dien_thoai && r.dien_thoai!='0' ? r.dien_thoai : '';
+    return `<div class="kh-card" data-ma="${esc(r.ma_khach_hang)}" onclick="showDetail(${start+i})" onpointerdown="longPressStart(event, this)" onpointerup="longPressEnd(this)" onpointerleave="longPressEnd(this)" onpointercancel="longPressEnd(this)">
+      <div class="kh-card-top">
+        <div class="kh-name">${hi(r.ten_khach_hang,q)||'—'}</div>
+      </div>
+      <div class="kh-danhso-row">
+        ${r.danh_so ? `<span class="kh-danhso">${hi(r.danh_so,q)}</span>` : ''}
+        ${r.danh_so && r.ma_khach_hang ? `<span class="kh-sep">-</span>` : ''}
+        ${r.ma_khach_hang ? `<span class="kh-ma">${hi(r.ma_khach_hang,q)}</span>` : ''}
+      </div>
+      <div class="kh-card-mid">
+        ${r.ma_sogcs ? `<span class="kh-sogcs">${hi(r.ma_sogcs,q)}</span>` : ''}
+        ${r.ma_sogcs && r.so_tbi ? `<span class="kh-sep">-</span>` : ''}
+        ${r.so_tbi ? `<span class="kh-sogcs">${hi(r.so_tbi,q)}</span>` : ''}
+        ${r.so_tbi && phone ? `<span class="kh-sep">-</span>` : ''}
+        ${phone ? `<a class="kh-phone" href="tel:${phone.replace(/[^0-9+]/g,'')}" onclick="event.stopPropagation()"><svg class='phone-icon' width='11' height='11' viewBox='0 0 24 24' fill='#ef4444' style='vertical-align:middle;margin-right:2px'><path d='M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z'/></svg> ${hi(phone,q)}</a>` : ''}
+        ${phone && r.ghi_chu ? `<span class="kh-sep">-</span>` : ''}
+        ${r.ghi_chu ? `<span class="kh-ghichu">${hi(r.ghi_chu,q)}</span>` : ''}
+      </div>
+
+      <div class="kh-card-mid" style="display:flex;flex-wrap:wrap;gap:2px 6px;font-size:14px;opacity:0.7;align-items:center">
+        ${r.so_pha ? `<span>⚡ ${hi(r.so_pha,q)}</span>` : ''}
+        ${r.so_pha && r.ma_tram ? `<span class="kh-sep">-</span>` : ''}
+        ${r.ma_tram ? `<span>🔌 ${hi(r.ma_tram,q)}</span>` : ''}
+        ${r.ma_tram && r.ten_tram ? `<span class="kh-sep">-</span>` : ''}
+        ${r.ten_tram ? `<span>🏢 ${hi(r.ten_tram,q)}</span>` : ''}
+      </div>
+      ${r.dia_chi ? `<div class="kh-addr-line"><a class="addr-link" href="${mapsUrl(r)}" target="_blank" onclick="event.stopPropagation()">📍 ${hi(r.dia_chi,q)}<span class="addr-map-icon">🗺</span></a></div>` : ''}
+      ${r.dinh_vi ? `<div class="kh-addr-line" style="color:#22c55e;font-size:14px;margin-top:2px"><a class="addr-link" href="https://www.google.com/maps?q=${encodeURIComponent(r.dinh_vi)}" target="_blank" onclick="event.stopPropagation()" style="color:#22c55e">🎯 ${hi(r.dinh_vi,q)}<span class="addr-map-icon">🗺</span></a></div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// TABLE (desktop)
+function renderTable(q='') {
+  const start = (currentPage-1)*PAGE_SIZE;
+  const pageData = filtered.slice(start, start+PAGE_SIZE);
+  const tbody = document.getElementById('tableBody');
+  const empty = document.getElementById('emptyStateTable');
+
+  if (filtered.length===0) { tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+
+  tbody.innerHTML = pageData.map((r,i) => {
+    const nc = r.ma_nhom ? nhomColor(r.ma_nhom) : '';
+    return `<tr onclick="showDetail(${start+i})">
+      <td style="color:var(--text-dim);font-size:15px;white-space:nowrap">${r.stt ? hi(r.stt,q) : (start+i+1)}</td>
+      <td><span class="ma-kh">${hi(r.ma_khach_hang,q)}</span></td>
+      <td class="ten-kh">${hi(r.ten_khach_hang,q)||'—'}</td>
+      <td class="cell-addr">${hi(r.dia_chi,q)||'—'}</td>
+      <td class="cell-dim">${hi(r.ma_sogcs,q)||'—'}</td>
+      <td class="cell-dim" style="white-space:nowrap">${hi(r.danh_so,q)||'—'}</td>
+      <td class="cell-dim">${hi(r.so_pha,q)||'—'}</td>
+      <td><span class="phone" style="white-space:nowrap">${r.dien_thoai&&r.dien_thoai!='0' ? hi(r.dien_thoai,q) : '<span style="color:var(--text-dim)">—</span>'}</span></td>
+      <td class="cell-dim">${hi(r.so_tbi,q)||'—'}</td>
+      <td class="cell-dim" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px">${hi(r.ma_tram,q)||'—'}</td>
+      <td class="cell-dim" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px">${hi(r.ten_tram,q)||'—'}</td>
+      <td><span class="badge" style="${nc?`background:${nc}22;color:${nc};border:1px solid ${nc}44`:''}">${hi(r.ma_nhom,q)||'—'}</span></td>
+
+    </tr>`;
+  }).join('');
+}
+
+function renderPagination() {
+  const total = Math.ceil(filtered.length/PAGE_SIZE);
+  const s = (currentPage-1)*PAGE_SIZE+1;
+  const e = Math.min(currentPage*PAGE_SIZE, filtered.length);
+  const infoText = filtered.length ? `${s.toLocaleString()}–${e.toLocaleString()} / ${filtered.length.toLocaleString()}` : '';
+
+  const suffixes = ['Card','Table'];
+  suffixes.forEach(suffix => {
+    document.getElementById('pageInfo'+suffix).textContent = infoText;
+    let html = `<button class="page-btn" onclick="goPage(1)" ${currentPage===1?'disabled':''} title="Trang đầu">«</button>`;
+    html += `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''} title="Trang trước">‹</button>`;
+    let pages = [];
+    if (total<=5) pages = Array.from({length:total},(_,i)=>i+1);
+    else {
+      pages=[1];
+      if (currentPage>3) pages.push('...');
+      for (let p=Math.max(2,currentPage-1); p<=Math.min(total-1,currentPage+1); p++) pages.push(p);
+      if (currentPage<total-2) pages.push('...');
+      pages.push(total);
+    }
+    pages.forEach(p => {
+      if (p==='...') html+=`<span class="page-btn" style="cursor:default">…</span>`;
+      else html+=`<button class="page-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+    });
+    html+=`<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''} title="Trang sau">›</button>`;
+    html+=`<button class="page-btn" onclick="goPage(${total})" ${currentPage===total?'disabled':''} title="Trang cuối">»</button>`;
+    document.getElementById('pageBtns'+suffix).innerHTML = html;
+    document.getElementById('pagination'+suffix).style.display = filtered.length>0 ? 'flex' : 'none';
+  });
+}
+
+function goPage(p) {
+  const total = Math.ceil(filtered.length/PAGE_SIZE);
+  if (p<1||p>total) return;
+  currentPage = p;
+  const q = document.getElementById('searchInput').value.trim();
+  renderCards(q); renderTable(q); renderPagination();
+  restoreHighlights();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Long press handler with persistence (by customer code)
+let longPressTimer = null;
+const HIGHLIGHT_KEY = 'qlno_highlighted';
+function getHighlightedIds() {
+  try { return JSON.parse(localStorage.getItem(HIGHLIGHT_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveHighlightedIds(ids) {
+  try { localStorage.setItem(HIGHLIGHT_KEY, JSON.stringify(ids)); } catch(e) {}
+}
+function longPressStart(e, el) {
+  longPressTimer = setTimeout(() => {
+    const ma = el.dataset.ma;
+    el.classList.toggle('highlighted');
+    let ids = getHighlightedIds();
+    if (el.classList.contains('highlighted')) {
+      if (!ids.includes(ma)) ids.push(ma);
+    } else {
+      ids = ids.filter(id => id !== ma);
+    }
+    saveHighlightedIds(ids);
+    longPressTimer = null;
+  }, 1500);
+}
+function longPressEnd(el) {
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+  }
+}
+function restoreHighlights() {
+  const ids = getHighlightedIds();
+  document.querySelectorAll('.kh-card').forEach(card => {
+    if (ids.includes(card.dataset.ma)) card.classList.add('highlighted');
+  });
+}
+
+function showDetail(idx) {
+  const r = filtered[idx];
+  if (!r) return;
+  document.getElementById('modalName').textContent = r.ten_khach_hang || 'Không có tên';
+  document.getElementById('modalMa').textContent = r.ma_khach_hang;
+
+  const phone = r.dien_thoai && r.dien_thoai!='0' ? r.dien_thoai : '';
+  const phoneHref = phone ? 'tel:' + phone.replace(/[^0-9+]/g, '') : '';
+  const phoneHtml = phone
+    ? `<a class="call-link" href="${esc(phoneHref)}">📞 ${esc(phone)}</a>`
+    : '—';
+
+  const rows = [
+    ['STT', esc(r.stt)||'—', 1],
+    ['Mã KH', `<span class="ma-kh" style="font-size:14px">${esc(r.ma_khach_hang)}</span>`],
+    ['Mã Số GCS', esc(r.ma_sogcs)||'—', 1],
+    ['Số TBi', esc(r.so_tbi)||'—', 1],
+    ['Danh Số', `<span style="color:var(--accent-glow);font-weight:700">${esc(r.danh_so)||'—'}</span>`],
+    ['Tên KH', `<span style="color:var(--accent-glow);font-weight:700">${esc(r.ten_khach_hang)}</span>`],
+    ['Địa chỉ', r.dia_chi ? `<a class="addr-link" href="${mapsUrl(r)}" target="_blank">${esc(r.dia_chi)} <span class="addr-map-icon">🗺</span></a>` : '—', 1],
+    ['Định vị', `<div style="display:flex;gap:6px;align-items:center"><input type="text" class="ghi-chu-input" style="border-color:#3b82f6;flex:1" value="${esc(r.dinh_vi||'')}" data-ma="${esc(r.ma_khach_hang)}" placeholder="VD: 10.762622,106.660172" oninput="saveDinhVi(this)"><button onclick="getMyLocation('${esc(r.ma_khach_hang)}')" style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:8px 10px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;flex-shrink:0">📍 Vị trí</button></div>`],
+    ['Số Pha', esc(r.so_pha)||'—'],
+    ['SĐT', phoneHtml],
+    ['Mã Trạm', esc(r.ma_tram)||'—', 1],
+    ['Tên Trạm', esc(r.ten_tram)||'—', 1],
+    ['Ghi chú', `<input type="text" class="ghi-chu-input" value="${esc(r.ghi_chu||'')}" data-ma="${esc(r.ma_khach_hang)}" placeholder="Nhập ghi chú..." oninput="saveGhiChu(this)">`],
+    ['Nhóm', r.ma_nhom ? `<span class="badge" style="background:${nhomColor(r.ma_nhom)}22;color:${nhomColor(r.ma_nhom)};border:1px solid ${nhomColor(r.ma_nhom)}44">${esc(r.ma_nhom)}</span>` : '—'],
+  ];
+
+  document.getElementById('modalBody').innerHTML = rows.map(([l,v,d]) =>
+    `<div class="info-row"><div class="info-label">${l}</div><div class="info-value${d?' dim':''}">${v}</div></div>`
+  ).join('');
+
+  // Focus ghi chú input
+  const gcInput = document.querySelector('.ghi-chu-input');
+  if (gcInput) gcInput.focus();
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// Save/load ghi chú
+let _ghiChuSaveTimer = null;
+function saveGhiChu(input) {
+  const ma = input.dataset.ma;
+  const val = input.value;
+  // Update allData immediately
+  allData.forEach(r => { if (r.ma_khach_hang === ma) r.ghi_chu = val; });
+  // Save to localStorage
+  let notes = {};
+  try { notes = JSON.parse(localStorage.getItem('qlno_notes') || '{}'); } catch(e) {}
+  notes[ma] = val;
+  localStorage.setItem('qlno_notes', JSON.stringify(notes));
+  // Live update the card's ghi chú display (mobile)
+  const card = document.querySelector(`.kh-card[data-ma="${CSS.escape(ma)}"]`);
+  if (card) {
+    const gcEl = card.querySelector('.kh-ghichu');
+    if (val) {
+      if (gcEl) { gcEl.innerHTML = hi(val); }
+      else {
+        const phoneEl = card.querySelector('.kh-phone');
+        const span = document.createElement('span');
+        span.className = 'kh-ghichu';
+        span.innerHTML = hi(val);
+        if (phoneEl) phoneEl.parentNode.insertBefore(span, null);
+        else card.querySelector('.kh-card-mid')?.appendChild(span);
+      }
+    } else if (gcEl) {
+      gcEl.remove();
+    }
+  }
+  // Live sync: update desktop table input if editing from mobile, or vice versa
+  document.querySelectorAll(`.ghi-chu-table[data-ma="${CSS.escape(ma)}"]`).forEach(el => { if (el !== input) el.value = val; });
+  document.querySelectorAll(`.ghi-chu-input[data-ma="${CSS.escape(ma)}"]`).forEach(el => { if (el !== input) el.value = val; });
+  // Debounce save + re-render cards immediately
+  clearTimeout(_ghiChuSaveTimer);
+  _ghiChuSaveTimer = setTimeout(() => {
+    saveData();
+    const savedPage = currentPage;
+    handleFilter();
+    currentPage = savedPage;
+    renderCards(document.getElementById('searchInput').value.trim());
+    renderTable(document.getElementById('searchInput').value.trim());
+    renderPagination();
+    restoreHighlights();
+  }, 300);
+}
+function loadGhiChu() {
+  let notes = {};
+  try { notes = JSON.parse(localStorage.getItem('qlno_notes') || '{}'); } catch(e) {}
+  allData.forEach(r => { if (notes[r.ma_khach_hang] !== undefined) r.ghi_chu = notes[r.ma_khach_hang]; });
+  // Sync desktop table inputs with loaded data
+  allData.forEach(r => {
+    document.querySelectorAll(`.ghi-chu-table[data-ma="${CSS.escape(r.ma_khach_hang)}"]`).forEach(el => { el.value = r.ghi_chu || ''; });
+    document.querySelectorAll(`.ghi-chu-input[data-ma="${CSS.escape(r.ma_khach_hang)}"]`).forEach(el => { el.value = r.ghi_chu || ''; });
+  });
+
+}
+
+function getMyLocation(ma) {
+  if (!navigator.geolocation) return alert('Trình duyệt không hỗ trợ định vị!');
+  // Find the input by placeholder to avoid conflict with ghi chú input
+  const inputs = document.querySelectorAll(`input[data-ma="${CSS.escape(ma)}"]`);
+  let targetInput = null;
+  inputs.forEach(el => { if (el.placeholder && el.placeholder.includes('10.762622')) targetInput = el; });
+  if (targetInput) targetInput.value = '⏳ Đang lấy GPS...';
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const lat = pos.coords.latitude.toFixed(6);
+      const lng = pos.coords.longitude.toFixed(6);
+      const val = `${lat},${lng}`;
+      allData.forEach(r => { if (r.ma_khach_hang === ma) { r.dinh_vi = val; r._search = buildSearchHaystack(r); } });
+      if (targetInput) targetInput.value = val;
+      saveData();
+      applyFilters();
+    },
+    err => {
+      if (targetInput) targetInput.value = '';
+      alert('Không thể lấy vị trí: ' + err.message);
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+  );
+}
+
+let _dinhViSaveTimer = null;
+function saveDinhVi(input) {
+  const ma = input.dataset.ma;
+  const val = input.value.trim();
+  allData.forEach(r => { if (r.ma_khach_hang === ma) { r.dinh_vi = val; r._search = buildSearchHaystack(r); } });
+  clearTimeout(_dinhViSaveTimer);
+  _dinhViSaveTimer = setTimeout(() => {
+    saveData();
+    applyFilters();
+  }, 500);
+}
+
+// ── EXPORT EXCEL ──
+function exportExcel() {
+  if (!allData.length) return alert('Không có dữ liệu để xuất!');
+  const exportRows = allData.map(r => ({
+    'STT': r.stt,
+    'MA_KHANG': r.ma_khach_hang,
+    'TEN_KHANG': r.ten_khach_hang,
+    'DIA CHI': r.dia_chi,
+    'MA SO GCS': r.ma_sogcs,
+    'DANH SO': r.danh_so,
+    'THANG NO': r.thang_no,
+    'TIEN NO': r.tien_no,
+    'SDT': r.dien_thoai,
+    'SO TBI': r.so_tbi,
+    'GHI CHU': r.ghi_chu,
+    'NV': r.nhan_vien,
+    'MA NHOM': r.ma_nhom,
+    'SO PHA': r.so_pha,
+    'MA TRAM': r.ma_tram,
+    'TEN TRAM': r.ten_tram,
+    'DINH VI': r.dinh_vi || '',
+  }));
+  const ws = XLSX.utils.json_to_sheet(exportRows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'DSKH');
+  if (summaryData.length) {
+    const ws2 = XLSX.utils.json_to_sheet(summaryData);
+    XLSX.utils.book_append_sheet(wb, ws2, 'TongHop');
+  }
+  const fname = originalFileName.endsWith('.xlsx') ? originalFileName : originalFileName + '.xlsx';
+  XLSX.writeFile(wb, fname);
+}
+
+function closeModal(e) { if (e.target===document.getElementById('modal')) closeModalDirect(); }
+function closeModalDirect() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── PER-EMPLOYEE STATS (click on an employee name) ──
+function showNvStats(idx) {
+  const r = filtered[idx];
+  if (!r || !r.nhan_vien) return;
+  nvScope = r.nhan_vien;
+  handleFilter();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Group filter replaces employee filter in the dropdown
+function handleNhomFilter() {
+  nvScope = '';
+  handleFilter();
+}
+
+function clearNvScope() {
+  nvScope = '';
+  document.getElementById('filterNhom').value = '';
+  document.getElementById('filterNhomLabel').innerHTML = '<span style="color:#3b82f6">📁</span> Tất cả các nhóm';
+  handleFilter();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModalDirect(); });
+
+// Restore persisted data if available
+restoreData();
+
+// Toolbar sticky via JS
+(function() {
+  const toolbar = document.querySelector('.toolbar');
+  const header = document.querySelector('.header');
+  if (!toolbar || !header) return;
+  const placeholder = document.createElement('div');
+  placeholder.style.display = 'none';
+  toolbar.parentNode.insertBefore(placeholder, toolbar);
+  function onScroll() {
+    const headerRect = header.getBoundingClientRect();
+    const placeholderRect = placeholder.getBoundingClientRect();
+    if (placeholderRect.top <= headerRect.bottom) {
+      // Placeholder scrolled above header bottom - fix toolbar below header
+      if (toolbar.style.position !== 'fixed') {
+        placeholder.style.display = 'block';
+        placeholder.style.height = toolbar.offsetHeight + 'px';
+        toolbar.style.position = 'fixed';
+        toolbar.style.top = header.offsetHeight + 'px';
+        toolbar.style.left = '0';
+        toolbar.style.right = '0';
+        toolbar.style.zIndex = '150';
+        toolbar.classList.add('stuck');
+      }
+    } else {
+      // Toolbar is in natural position
+      if (toolbar.style.position === 'fixed') {
+        placeholder.style.display = 'none';
+        toolbar.style.position = '';
+        toolbar.style.top = '';
+        toolbar.style.left = '';
+        toolbar.style.right = '';
+        toolbar.classList.remove('stuck');
+      }
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// Touch swipe down to close modal
+let touchStartY = 0;
+document.getElementById('modal').querySelector('.modal').addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; });
+document.getElementById('modal').querySelector('.modal').addEventListener('touchend', e => {
+  if (e.changedTouches[0].clientY - touchStartY > 80) closeModalDirect();
+});
+</script>
+</body>
+</html>
