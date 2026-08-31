@@ -494,7 +494,7 @@ body.light-mode .filter-select.rainbow-active #filterNhomLabel {
 .sort-btn.active .sort-arrow { color: #ffffff; }
 /* Per-button active colors */
 #sortDanhSo.active { border-color: #3b82f6; background: #3b82f6; color: #ffffff; }
-#sortMaKH.active { border-color: #a855f7; background: #a855f7; color: #ffffff; }
+#sortMaKH.active { border-color: #eab308; background: #eab308; color: #ffffff; }
 #sortSoGCS.active { border-color: #f97316; background: #f97316; color: #ffffff; }
 #sortTenKH.active { border-color: #a855f7; background: #a855f7; color: #ffffff; }
 #sortDanhSo.active .sort-arrow, #sortMaKH.active .sort-arrow, #sortSoGCS.active .sort-arrow, #sortTenKH.active .sort-arrow { color: #ffffff; }
@@ -1701,10 +1701,8 @@ function applyFilters() {
   filtered = allData.filter(r => {
     if (nhom && r.ma_nhom !== nhom) return false;
     if (nvScope && r.nhan_vien !== nvScope) return false;
-    if (q) {
-      if (/^\d+$/.test(q)) {
-        const tail6 = s => { const d = (s||'').replace(/\D/g,''); return d.slice(-6); };
-        const match = [r.ma_khach_hang, r.ma_sogcs, r.danh_so, r.dien_thoai, r.so_tbi].some(f => tail6(f) === q);
+    if (q) {        if (/^\d+$/.test(q)) {
+        const match = [r.ma_khach_hang, r.ma_sogcs, r.danh_so, r.dien_thoai, r.so_tbi].some(f => (f||'').replace(/\D/g,'').includes(q));
         if (!match) return false;
       } else {
         if (r._search && !r._search.includes(q)) return false;
@@ -1803,16 +1801,15 @@ function renderCards(q='') {
         <div class="kh-name">${hi(r.ten_khach_hang,q)||'—'}</div>
       </div>
       ${r.dia_chi ? `<div class="kh-addr-line"><a class="addr-link" href="${mapsUrl(r)}" target="_blank" onclick="event.stopPropagation()">📍 ${hi(r.dia_chi,q)}<span class="addr-map-icon">🗺</span></a></div>` : ''}
-      ${r.dinh_vi ? `<div class="kh-addr-line" style="color:#22c55e;font-size:14px;margin-top:2px"><a class="addr-link" href="https://www.google.com/maps?q=${encodeURIComponent(r.dinh_vi)}" target="_blank" onclick="event.stopPropagation()" style="color:#22c55e">🎯 ${hi(r.dinh_vi,q)}<span class="addr-map-icon">🗺</span></a></div>` : ''}
-      <div class="kh-danhso-row">
-        ${r.ma_khach_hang ? `<span class="kh-ma">${hi(r.ma_khach_hang,q)}</span>` : ''}
-        ${r.ma_khach_hang && r.so_tbi ? `<span class="kh-sep">-</span>` : ''}
-        ${r.so_tbi ? `<span class="kh-highlight">${hi(r.so_tbi,q)}</span>` : ''}
+      <div class="kh-danhso-row" style="margin-bottom:4px">
+        ${r.ma_khach_hang ? `<span style="font-size:14px;color:#94a3b8;font-weight:600">Mã KH:</span> <span class="kh-ma" style="font-size:14px">${hi(r.ma_khach_hang,q)}</span>` : ''}
+        ${r.ma_khach_hang && r.so_tbi ? `<span class="kh-sep" style="margin:0 4px">-</span>` : ''}
+        ${r.so_tbi ? `<span style="font-size:14px;color:#94a3b8;font-weight:600">Số No:</span> <span class="kh-highlight" style="font-size:14px">${hi(r.so_tbi,q)}</span>` : ''}
       </div>
       <div class="kh-card-mid">
         ${r.ma_sogcs ? `<span class="kh-sogcs">${hi(r.ma_sogcs,q)}</span>` : ''}
         ${r.ma_sogcs && r.danh_so ? `<span class="kh-sep">-</span>` : ''}
-        ${r.danh_so ? `<span class="kh-highlight">${hi(r.danh_so,q)}</span>` : ''}
+        ${r.danh_so ? `<span style="font-size:14px;color:#94a3b8;font-weight:600">Danh số:</span> <span class="kh-highlight">${hi(r.danh_so,q)}</span>` : ''}
         ${r.danh_so && phone ? `<span class="kh-sep">-</span>` : ''}
         ${phone ? `<a class="kh-phone" href="tel:${phone.replace(/[^0-9+]/g,'')}" onclick="event.stopPropagation()"><svg class='phone-icon' width='11' height='11' viewBox='0 0 24 24' fill='#ef4444' style='vertical-align:middle;margin-right:2px'><path d='M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z'/></svg> ${hi(phone,q)}</a>` : ''}
         ${phone && r.ghi_chu ? `<span class="kh-sep">-</span>` : ''}
@@ -1820,11 +1817,11 @@ function renderCards(q='') {
       </div>
 
       <div class="kh-card-mid" style="display:flex;flex-wrap:wrap;gap:2px 6px;font-size:14px;opacity:0.7;align-items:center">
-        ${r.so_pha ? `<span>⚡ ${hi(r.so_pha,q)}</span>` : ''}
-        ${r.so_pha && r.ma_tram ? `<span class="kh-sep">-</span>` : ''}
         ${r.ma_tram ? `<span>🔌 ${hi(r.ma_tram,q)}</span>` : ''}
         ${r.ma_tram && r.ten_tram ? `<span class="kh-sep">-</span>` : ''}
         ${r.ten_tram ? `<span>🏢 ${hi(r.ten_tram,q)}</span>` : ''}
+        ${r.ten_tram && r.so_pha ? `<span class="kh-sep">-</span>` : ''}
+        ${r.so_pha ? `<span>⚡ Số pha: ${hi(r.so_pha,q)}</span>` : ''}
       </div>
     </div>`;
   }).join('');
