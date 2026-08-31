@@ -1701,7 +1701,7 @@ function applyFilters() {
   filtered = allData.filter(r => {
     if (nhom && r.ma_nhom !== nhom) return false;
     if (nvScope && r.nhan_vien !== nvScope) return false;
-    if (q) {        if (/^\d+$/.test(q)) {
+    if (q) {        if (/^\d{5,}$/.test(q)) {
         const match = [r.ma_khach_hang, r.ma_sogcs, r.danh_so, r.dien_thoai, r.so_tbi].some(f => (f||'').replace(/\D/g,'').includes(q));
         if (!match) return false;
       } else {
