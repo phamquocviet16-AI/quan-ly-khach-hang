@@ -1821,7 +1821,7 @@ function renderCards(q='') {
         ${r.ma_tram && r.ten_tram ? `<span class="kh-sep">-</span>` : ''}
         ${r.ten_tram ? `<span>🏢 ${hi(r.ten_tram,q)}</span>` : ''}
         ${r.ten_tram && r.so_pha ? `<span class="kh-sep">-</span>` : ''}
-        ${r.so_pha ? `<span><svg width='14' height='14' viewBox='0 0 24 24' fill='#ca8a04' style='vertical-align:middle;margin-right:2px'><circle cx='12' cy='12' r='10' fill='none' stroke='#ca8a04' stroke-width='2'/><circle cx='12' cy='12' r='3' fill='#ca8a04'/><line x1='12' y1='2' x2='12' y2='5' stroke='#ca8a04' stroke-width='2'/><line x1='12' y1='19' x2='12' y2='22' stroke='#ca8a04' stroke-width='2'/><line x1='2' y1='12' x2='5' y2='12' stroke='#ca8a04' stroke-width='2'/><line x1='19' y1='12' x2='22' y2='12' stroke='#ca8a04' stroke-width='2'/></svg> Số pha: ${hi(r.so_pha,q)}</span>` : ''}
+        ${r.so_pha ? `<span><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#1f2937' style='vertical-align:middle;margin-right:2px'><line x1='12' y1='3' x2='12' y2='22' stroke-width='2.5' stroke-linecap='round'/><line x1='5' y1='5' x2='19' y2='5' stroke-width='2' stroke-linecap='round'/><line x1='3' y1='5' x2='3' y2='9' stroke-width='1.5'/><line x1='21' y1='5' x2='21' y2='9' stroke-width='1.5'/><path d='M3 9 Q7.5 7 12 9 Q16.5 11 21 9' stroke-width='1.5' fill='none'/></svg> Số pha: ${hi(r.so_pha,q)}</span>` : ''}
       </div>
     </div>`;
   }).join('');
